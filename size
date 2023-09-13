@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Get the percentage value from the command
+percentage=$(df -h / | sed -n '1!p' | awk '{ print $5 }' | cut -d'%' -f1)
+
+# Define the threshold (e.g., 90%)
+threshold=90
+
+# Check if the percentage is greater than the threshold
+if [ "$percentage" -gt "$threshold" ]; then
+    echo "Disk usage is above $threshold%: $percentage%"
+    # Add your action here, e.g., send an alert or take some corrective action
+else
+    echo "Disk usage is below $threshold%: $percentage%"
+fi
